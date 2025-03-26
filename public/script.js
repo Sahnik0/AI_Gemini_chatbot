@@ -46,16 +46,22 @@ function sendMessage() {
 
 // Function to fetch the bot's response from the server
 function fetchBotResponse(formData) {
-    fetch("/api/get", { // Updated endpoint
+    fetch("/get", { 
         method: "POST",
         body: formData,
     })
-        .then((response) => response.text())
-        .then((data) => displayBotResponse(data))
-        .catch(() => displayError())
-        .finally(() => {
-            selectedFile = null; // Reset the selected file after sending
-        });
+    .then((response) => {
+        console.log('Response status:', response.status);
+        return response.text();
+    })
+    .then((data) => {
+        console.log('Received data:', data);
+        displayBotResponse(data);
+    })
+    .catch((error) => {
+        console.error('Fetch error:', error);
+        displayError();
+    });
 }
 
 // Function to display the bot's response with a gradual reveal effect

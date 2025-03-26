@@ -1,8 +1,18 @@
 {
-    "rewrites": [
+    "version": 2,
+    "builds": [
       {
-        "source": "/(.*)",
-        "destination": "/index.html"
+        "src": "server.js",
+        "use": "@vercel/node"
       }
-    ]
+    ],
+    "routes": [
+      {
+        "src": "/get",
+        "dest": "server.js"
+      }
+    ],
+    "env": {
+      "GEMINI_API_KEY": "@gemini_api_key"
+    }
   }
